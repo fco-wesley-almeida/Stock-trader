@@ -1,19 +1,18 @@
 <template>
-  <div id="app">
-    <div id="nav">
+  <v-app>
+    <Header></Header>
+    <v-content>
       <router-view></router-view>
-    </div>
-  </div>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
+import Header from '@/views/Header'
 
-// import Home from '@/views/Home'
-
-// export default {
-//   components: { Home }
-// }
-
+export default {
+  components: { Header }
+}
 </script>
 
 <style>
