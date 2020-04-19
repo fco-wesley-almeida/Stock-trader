@@ -1,21 +1,18 @@
-export default{
-  namespaced:true,
-  state:{
-    products:[{name:'BMW', quantity:1}],
+export default {
+  namespaced: true,
+  state: {
+    // products:[{name:'BMW', quantity:1}],
   },
 
-  getters:{
-
-  },
-
-  mutations:{
+  getters: {
 
   },
 
-  actions:{
+  mutations: {
 
   },
 
+  actions: {
 
-
+  }
 }

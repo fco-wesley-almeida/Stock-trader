@@ -1,18 +1,25 @@
 <template>
     <v-layout row wrap>
-        <Card nature="p" title="BMW" description="preço: R$ 100,00"/>
-        <Card nature="p" title="Apple" description="preço: R$ 100,00"/>
-        <Card nature="p" title="Google" description="preço: R$ 100,00"/>
-        <Card nature="p" title="Twitter" description="preço: R$ 100,00"/>
+      <Card nature="p" v-for="p in products" :key="p.name" :product="p"/>
     </v-layout>
 </template>
 
 <script>
 
 import Card from '@/components/widgets/Card'
+import { mapGetters } from 'vuex'
 
 export default {
-  components: { Card }
+  components: { Card },
+  computed: {
+    ...mapGetters('Stocks', { products: 'getProducts' })
+  },
+
+  methods: {
+    getPrice (product) {
+
+    }
+  }
 }
 </script>
 

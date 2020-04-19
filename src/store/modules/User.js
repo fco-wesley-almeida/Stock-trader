@@ -17,6 +17,8 @@ export default {
   },
 
   actions: {
-
+    updateSale ({ commit }, payLoad) {
+      commit('setSale', payLoad)
+    }
   }
 }

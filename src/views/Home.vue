@@ -10,13 +10,13 @@
 <script >
 
 import Sheet from '@/components/widgets/Home/Sheet.vue'
-// import { mapGetters } from 'vuex'
 
 export default {
   components: { Sheet },
 
   computed: {
     sale () {
+      // return this.$store.state.User.sale
       return this.$store.state.User.sale
     }
   }
