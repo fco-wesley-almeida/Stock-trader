@@ -52,15 +52,27 @@ export default {
 
   data () {
     return {
-      quantity: 0
+      quantity: 0,
+      request: {
+        operation: this.nature === 's' ? 'increase' : 'decrease',
+        attribute: 'quantity',
+        product: {
+          name: this.product.name
+        }
+      },
+      title: this.product.name,
+      plusPrice: this.nature === 's' ? -1 : 1,
+      natureStyle: `${this.nature === 'p' ? 'blue' : 'green'} darken-3`
     }
   },
 
   computed: {
-    natureStyle () {
-      const style = `${this.nature === 'p' ? 'blue' : 'green'} darken-3`
-      return style
+    description () {
+      let description = `(Preço: ${this.product.price}`
+      description += (this.nature === 'p') ? ` | Qtde: ${this.product.quantity})` : ')'
+      return description
     },
+
     buttonStyle () {
       let style = ''
       if (this.disabled) {
@@ -68,20 +80,7 @@ export default {
       } else {
         style = `${this.nature === 'p' ? 'blue' : 'green'} darken-3`
       }
-
       return style
-    },
-
-    title () {
-      const title = this.product.name
-      return title
-    },
-
-    description () {
-      let description
-      description = `(Preço: ${this.product.price}`
-      description += this.nature === 'p' ? ` | Qtde: ${this.product.quantity})` : ')'
-      return description
     },
 
     labelButton () {
@@ -97,18 +96,9 @@ export default {
     },
 
     totalPrice () {
+      console.log(this.product)
       const totalPrice = this.quantity * this.product.price
       return totalPrice
-    },
-
-    operation () {
-      const operation = this.nature === 's' ? 'increase' : 'decrease'
-      return operation
-    },
-
-    plusPrice () {
-      const plusPrice = (this.nature === 's') ? -1 : 1
-      return plusPrice
     },
 
     disabled () {
@@ -121,7 +111,8 @@ export default {
       } else {
         overflow = (this.quantity > this.product.quantity)
       }
-      return !(productsNumberIsPositive && !overflow)
+      const disabled = !(productsNumberIsPositive && !overflow)
+      return disabled
     }
 
   },
@@ -133,18 +124,9 @@ export default {
     ...mapActions('Stocks', ['updateAttribute']),
 
     action () {
-      const request = {
-        operation: this.operation,
-        attribute: 'quantity',
-        product: {
-          name: this.product.name,
-          quantity: this.quantity
-        }
-      }
-      const plus = this.plusPrice
-
-      this.updateAttribute(request)
-      this.$store.state.User.sale += (plus * this.totalPrice)
+      this.request.product.quantity = this.quantity
+      this.updateAttribute(this.request)
+      this.$store.state.User.sale += (this.plusPrice * this.totalPrice)
       this.quantity = 0
     }
   }

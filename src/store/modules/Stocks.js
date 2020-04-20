@@ -2,10 +2,10 @@ export default {
   namespaced: true,
   state: {
     products: [
-      { name: 'BMW', price: 250.5, quantity: 0 },
-      { name: 'Google', price: 500, quantity: 0 },
-      { name: 'Apple', price: 700, quantity: 0 },
-      { name: 'Twitter', price: 900, quantity: 0 }
+      { name: 'BMW', price: 100, quantity: 0 },
+      { name: 'Google', price: 100, quantity: 0 },
+      { name: 'Apple', price: 100, quantity: 0 },
+      { name: 'Twitter', price: 100, quantity: 0 }
     ]
   },
 
@@ -21,6 +21,8 @@ export default {
       console.log(request)
       const pName = request.product.name
       const updateProduct = request.updateProduct
+      console.log(pName)
+      console.log(updateProduct)
       state.products = state.products.map(p => p.name === pName ? updateProduct(p, request) : p)
     }
   },
@@ -46,6 +48,10 @@ export default {
         const reqOperation = request.operation
         const attribute = request.attribute
         const reqNewAttributeValue = request.product[attribute]
+
+        console.log(reqOperation)
+        console.log(attribute)
+        console.log(reqNewAttributeValue)
 
         if (reqOperation) {
           product[attribute] += (reqOperation * reqNewAttributeValue)
