@@ -3,9 +3,9 @@ export default {
   state: {
     products: [
       { name: 'BMW', price: 250.5, quantity: 0 },
-      { name: 'Google', price: 500, quantity: 2 },
+      { name: 'Google', price: 500, quantity: 0 },
       { name: 'Apple', price: 700, quantity: 0 },
-      { name: 'Twitter', price: 900, quantity: 3 }
+      { name: 'Twitter', price: 900, quantity: 0 }
     ]
   },
 
@@ -16,32 +16,46 @@ export default {
   },
 
   mutations: {
-
-    setAttribute (state, payLoad) {
-      // let products = state.products
-      console.log('updateAttribute')
-      const operation = payLoad.operation
-      const attributeName = operation.replace('update', '').toLowerCase()
-      const pName = payLoad.product.name
-
-      console.log(payLoad)
-      console.log(attributeName)
-
-      const updateProduct = function (product) {
-        const updatedProduct = product
-        updatedProduct[attributeName] = payLoad.product[attributeName]
-        console.log(updatedProduct)
-        return updatedProduct
-      }
-
-      state.products = state.products.map(p => p.name === pName ? updateProduct(p) : p)
+    setAttribute (state, request) {
+      console.log('setAttribute')
+      console.log(request)
+      const pName = request.product.name
+      const updateProduct = request.updateProduct
+      state.products = state.products.map(p => p.name === pName ? updateProduct(p, request) : p)
     }
   },
 
   actions: {
-    setAttribute ({ commit }, payLoad) {
+    updateAttribute ({ commit }, request) {
       console.log('updateAttribute')
-      commit('updateAttribute', payLoad)
+      const operation = request.operation
+
+      switch (operation) {
+        case 'increase':
+          request.operation = 1
+          break
+        case 'decrease':
+          request.operation = -1
+          break
+        case 'set':
+          request.operation = 0
+          break
+      }
+
+      request.updateProduct = function (product, request) {
+        const reqOperation = request.operation
+        const attribute = request.attribute
+        const reqNewAttributeValue = request.product[attribute]
+
+        if (reqOperation) {
+          product[attribute] += (reqOperation * reqNewAttributeValue)
+        } else {
+          product[attribute] = reqNewAttributeValue
+        }
+        return product
+      }
+
+      commit('setAttribute', request)
     }
   }
 }
