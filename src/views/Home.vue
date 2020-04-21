@@ -3,7 +3,7 @@
     <h1 class="font-weight-light title mb-6">Negocie e consulte suas ações</h1>
     <Sheet color="blue" message="Você pode Salvar & Carregar os Dados"></Sheet>
     <Sheet color="green" message="Clique em 'Finalizar Dia' para iniciar um novo dia!"></Sheet>
-     <p class="font-weight-light mb-6 money"><strong class="left-over">Seu saldo:</strong> {{ sale }} </p>
+     <p class="font-weight-light mb-6 money"><strong class="left-over">Seu saldo:</strong> {{ sale | real }} </p>
   </div>
 </template>
 
@@ -16,7 +16,6 @@ export default {
 
   computed: {
     sale () {
-      // return this.$store.state.User.sale
       return this.$store.state.User.sale
     }
   }

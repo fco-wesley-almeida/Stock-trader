@@ -7,6 +7,11 @@ import './plugins/axios'
 
 Vue.config.productionTip = false
 
+Vue.filter('real', function (money) {
+  money = `R$ ${(parseFloat(money).toFixed(2)).toString().replace('.', ',')}`
+  return money
+})
+
 new Vue({
   router,
   store,

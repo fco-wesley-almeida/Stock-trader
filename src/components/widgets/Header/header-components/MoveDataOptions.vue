@@ -10,10 +10,14 @@
 
 import Menu from './Menu'
 import LeftOver from './LeftOver'
-import { mapActions } from 'vuex'
+import getProductsMixin from '@/mixins/getProductsMixin'
+import updateAttributeMixin from '@/mixins/updateAttributeMixin'
 
 export default {
   components: { Menu, LeftOver },
+
+  mixins: [getProductsMixin, updateAttributeMixin],
+
   props: {
     buttonsStyle: {
       type: Object
@@ -21,15 +25,14 @@ export default {
   },
 
   data () {
-    return {}
-  },
+    return {
+      request: {
+        operation: 'set',
+        attribute: 'price',
+        product: {}
+      },
 
-  methods: {
-    ...mapActions('Stocks', ['updateAttribute']),
-    endDay () {
-      const products = this.$store.getters['Stocks/getProducts']
-
-      const randomPrice = function (oldPrice) {
+      randomPrice: function (oldPrice) {
         const random = Math.random()
         const delta = random - 0.5
         let newPrice = (oldPrice * (delta + 1))
@@ -38,19 +41,20 @@ export default {
         return newPrice
       }
 
-      const request = {
-        operation: 'set',
-        attribute: 'price',
-        product: { operation: 'set', attribute: 'price' }
-      }
+    }
+  },
 
-      let product = { }
+  methods: {
+    endDay () {
+      const products = this.products
+      const request = this.request
+      const randomPrice = this.randomPrice
+      let product = {}
 
       for (var i in products) {
         product = products[i]
         request.product.name = product.name
         request.product.price = randomPrice(product.price)
-        // console.log(request)
         this.updateAttribute(request)
       }
     }

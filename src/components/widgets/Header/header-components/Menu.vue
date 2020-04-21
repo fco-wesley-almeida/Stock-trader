@@ -20,66 +20,26 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-// import { mapActions } from 'vuex'
+import getProductsMixin from '@/mixins/getProductsMixin'
+import updateProductsMixin from '@/mixins/updateProductsMixin'
+import dataBaseMixin from '@/mixins/dataBaseMixin'
+import getSaleMixin from '@/mixins/getSaleMixin'
 
 export default {
+
+  mixins: [dataBaseMixin, updateProductsMixin, getProductsMixin, getSaleMixin],
+
   data () {
     return {
       items: [{ title: 'Salvar dados' }, { title: 'Carregar dados' }],
-      on: true,
-      sucess: method => alert(`Dados ${method === 'save' ? 'salvos' : 'carregados'} com sucesso!`),
-      errorMessage: e => console.log(e),
-      url: obj => `${this.$http.baseURL}/${obj}.json`,
-
-      sendToFirebase: function (vm, url, sucess, errorMessage, objTarget, objToSend) {
-        vm.$http
-          .put(url(objTarget), objToSend)
-          .then(sucess('save'))
-          .catch(errorMessage)
-      },
-
-      getDataFromFirebase: function (vm, url, objSource, f) {
-        vm.$http.get(url(objSource)).then(function (ans) {
-          try {
-            f(vm, ans)
-          } catch (error) {
-            vm.errorMessage(error)
-          }
-        })
-      },
-
-      requestData: [
-        {
-          objSource: 'stocks',
-          functionLoad: function (vm, ans) {
-            vm.updateProducts(ans.data)
-            vm.sucess('load')
-          }
-        },
-
-        {
-          objSource: 'sale',
-          functionLoad: function (vm, ans) {
-            vm.$store.state.User.sale = ans.data
-          }
-        }
-      ]
-
+      on: true
     }
   },
 
-  computed: {
-    ...mapGetters('Stocks', { products: 'getProducts' })
-  },
-
   methods: {
-    ...mapActions('Stocks', ['updateProducts']),
-
     save () {
-      console.log('save')
       const products = this.products
-      const sale = this.$store.state.User.sale
+      const sale = this.sale
       const url = this.url
       const sucess = this.sucess
       const errorMessage = this.errorMessage
@@ -90,10 +50,10 @@ export default {
 
     load () {
       const url = this.url
-      const getDataFromFirebase = this.getDataFromFirebase
+      const getFromFirebase = this.getFromFirebase
       const requestData = this.requestData
       for (var i in requestData) {
-        getDataFromFirebase(this, url, requestData[i].objSource, requestData[i].functionLoad)
+        getFromFirebase(this, url, requestData[i].objSource, requestData[i].functionLoad)
       }
     }
   }

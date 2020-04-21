@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Portfolio from './modules/Porfolio'
 import Stocks from './modules/Stocks'
 import User from './modules/User'
 
@@ -15,5 +14,5 @@ export default new Vuex.Store({
   },
   actions: {
   },
-  modules: { User, Portfolio, Stocks }
+  modules: { User, Stocks }
 })

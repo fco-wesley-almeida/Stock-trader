@@ -6,7 +6,7 @@
       <v-card min-width="375px" max-width="375px" :class="natureStyle">
         <div class="box" :style="natureStyle">
           <v-card-title class="headline">
-            <strong> {{ title }} <small>{{ description }}</small></strong>
+            <strong> {{ title }} <small> (Preço: {{ product.price | real }}{{ description }}</small></strong>
           </v-card-title>
         </div>
       </v-card>
@@ -29,7 +29,7 @@
 
 <script>
 
-import { mapActions } from 'vuex'
+import updateAttributeMixin from '@/mixins/updateAttributeMixin'
 
 export default {
   props: {
@@ -50,6 +50,8 @@ export default {
 
   },
 
+  mixins: [updateAttributeMixin],
+
   data () {
     return {
       quantity: 0,
@@ -68,8 +70,8 @@ export default {
 
   computed: {
     description () {
-      let description = `(Preço: ${this.product.price}`
-      description += (this.nature === 'p') ? ` | Qtde: ${this.product.quantity})` : ')'
+      // let description = `(Preço: ${this.product.price}`
+      const description = (this.nature === 'p') ? ` | Qtde: ${this.product.quantity})` : ')'
       return description
     },
 
@@ -96,7 +98,6 @@ export default {
     },
 
     totalPrice () {
-      // console.log(this.product)
       const totalPrice = this.quantity * this.product.price
       return totalPrice
     },
@@ -121,7 +122,6 @@ export default {
   },
 
   methods: {
-    ...mapActions('Stocks', ['updateAttribute']),
 
     action () {
       this.request.product.quantity = this.quantity

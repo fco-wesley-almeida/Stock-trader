@@ -1,3 +1,6 @@
+import updateProduct from '@/miscellaneous/updateProduct'
+// const updateProduct = updateProduct_
+
 export default {
   namespaced: true,
   state: {
@@ -17,12 +20,8 @@ export default {
 
   mutations: {
     setAttribute (state, request) {
-      // console.log('setAttribute')
-      // console.log(request)
       const pName = request.product.name
       const updateProduct = request.updateProduct
-      // console.log(pName)
-      // console.log(updateProduct)
       state.products = state.products.map(p => p.name === pName ? updateProduct(p, request) : p)
     },
 
@@ -33,7 +32,6 @@ export default {
 
   actions: {
     updateAttribute ({ commit }, request) {
-      // console.log('updateAttribute')
       const operation = request.operation
 
       switch (operation) {
@@ -48,23 +46,7 @@ export default {
           break
       }
 
-      request.updateProduct = function (product, request) {
-        const reqOperation = request.operation
-        const attribute = request.attribute
-        const reqNewAttributeValue = request.product[attribute]
-
-        // console.log(reqOperation)
-        // console.log(attribute)
-        // console.log(reqNewAttributeValue)
-
-        if (reqOperation) {
-          product[attribute] += (reqOperation * reqNewAttributeValue)
-        } else {
-          product[attribute] = reqNewAttributeValue
-        }
-        return product
-      }
-
+      request.updateProduct = updateProduct
       commit('setAttribute', request)
     },
 

@@ -7,19 +7,11 @@
 <script>
 
 import Card from '@/components/widgets/Card'
-import { mapGetters } from 'vuex'
+import getProductsMixin from '@/mixins/getProductsMixin'
 
 export default {
   components: { Card },
-  computed: {
-    ...mapGetters('Stocks', { products: 'getProducts' })
-  },
-
-  methods: {
-    getPrice (product) {
-
-    }
-  }
+  mixins: [getProductsMixin]
 }
 </script>
 
