@@ -1,7 +1,7 @@
 <template>
       <v-toolbar-items>
         <v-btn :style="buttonsStyle" depressed @click="endDay">Finalizar dia</v-btn>
-        <Menu></Menu>
+        <Menu :labelStyle="buttonsStyle"></Menu>
         <LeftOver :buttonsStyle="buttonsStyle"></LeftOver>
       </v-toolbar-items>
 </template>

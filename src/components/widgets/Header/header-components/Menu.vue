@@ -1,7 +1,7 @@
 <template>
   <v-menu offset-y open-on-click>
     <template v-slot:activator="{ on }">
-      <v-btn v-on="on" depressed class="buttons-label">Salvar e carregar</v-btn>
+      <v-btn v-on="on" depressed class="buttons-label" :style="labelStyle">Salvar e carregar</v-btn>
     </template>
 
     <v-list>
@@ -28,6 +28,9 @@ import getSaleMixin from '@/mixins/getSaleMixin'
 export default {
 
   mixins: [dataBaseMixin, updateProductsMixin, getProductsMixin, getSaleMixin],
+  props: {
+    labelStyle: { default: {} }
+  },
 
   data () {
     return {
