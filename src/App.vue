@@ -14,6 +14,7 @@ export default {
   components: { Header },
 
   created () {
+  // https://console.firebase.google.com/u/0/project/stock-trader-e1723/database
   }
 }
 </script>

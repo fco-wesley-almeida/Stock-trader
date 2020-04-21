@@ -50,7 +50,7 @@ export default {
         product = products[i]
         request.product.name = product.name
         request.product.price = randomPrice(product.price)
-        console.log(request)
+        // console.log(request)
         this.updateAttribute(request)
       }
     }

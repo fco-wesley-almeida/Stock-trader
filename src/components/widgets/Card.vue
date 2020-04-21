@@ -96,7 +96,7 @@ export default {
     },
 
     totalPrice () {
-      console.log(this.product)
+      // console.log(this.product)
       const totalPrice = this.quantity * this.product.price
       return totalPrice
     },
