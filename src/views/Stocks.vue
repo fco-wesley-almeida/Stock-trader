@@ -14,7 +14,3 @@ export default {
   mixins: [getProductsMixin]
 }
 </script>
-
-<style scoped>
-
-</style>

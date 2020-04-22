@@ -38,24 +38,12 @@ export default {
 
   methods: {
     save () {
-      const products = this.products
-      const sale = this.sale
-      const url = this.url
-      const sucess = this.sucess
-      const errorMessage = this.errorMessage
-      const sendToFirebase = this.sendToFirebase
-      sendToFirebase(this, url, () => '', errorMessage, 'stocks', products)
-      sendToFirebase(this, url, sucess, errorMessage, 'sale', sale)
+      this.sendToFirebase(this, this.url, () => '', this.errorMessage, 'stocks', this.products)
+      this.sendToFirebase(this, this.url, this.sucess, this.errorMessage, 'sale', this.sale)
     },
 
     load () {
-      const url = this.url
-      const getFromFirebase = this.getFromFirebase
-      const requestData = this.requestData
-      requestData.forEach((reqDataObj) => getFromFirebase(this, url, reqDataObj.objSource, reqDataObj.functionLoad))
-      // for (var i in requestData) {
-      //   getFromFirebase(this, url, requestData[i].objSource, requestData[i].functionLoad)
-      // }
+      this.requestData.forEach((reqDataObj) => this.getFromFirebase(this, this.url, reqDataObj.objSource, reqDataObj.functionLoad))
     }
   }
 }

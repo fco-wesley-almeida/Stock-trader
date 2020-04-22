@@ -1,7 +1,7 @@
 <template>
-  <v-layout class="card" v-if="product.quantity || nature === 's'">
+  <!-- <v-layout class="card" v-if="product.quantity || nature === 's'"> -->
     <!-- <v-flex class="pr-3 pb-3" xs12 md6 lg4> -->
-    <v-flex >
+    <v-flex class="card pr-3 pb-3" xs12 md6 lg4>
 
       <v-card min-width="375px" max-width="375px" :class="natureStyle">
         <div class="box" :style="natureStyle">
@@ -24,7 +24,7 @@
       </v-card>
 
     </v-flex>
-  </v-layout>
+  <!-- </v-layout> -->
 </template>
 
 <script>
@@ -93,7 +93,6 @@ export default {
       } else {
         label = this.quantity > this.product.quantity ? 'Insuficiente' : 'Vender'
       }
-
       return label
     },
 
@@ -136,8 +135,8 @@ export default {
 
 <style scoped>
 .box {
-  height: 60px;
-  width: 375px;
+  /* height: 60px;
+  width: 375px; */
   /* background-color: rgb(39, 39, 238); */
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: x-large;
@@ -145,7 +144,6 @@ export default {
 }
 
 .card {
-  margin-top: 50px;
-  margin-left: 50px;
+  padding: 50px;
   }
 </style>

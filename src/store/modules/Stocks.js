@@ -21,7 +21,6 @@ export default {
   mutations: {
     setAttribute (state, request) {
       const pName = request.product.name
-      const updateProduct = request.updateProduct
       state.products = state.products.map(p => p.name === pName ? updateProduct(p, request) : p)
     },
 
@@ -32,9 +31,7 @@ export default {
 
   actions: {
     updateAttribute ({ commit }, request) {
-      const operation = request.operation
-
-      switch (operation) {
+      switch (request.operation) {
         case 'increase':
           request.operation = 1
           break
@@ -45,8 +42,6 @@ export default {
           request.operation = 0
           break
       }
-
-      request.updateProduct = updateProduct
       commit('setAttribute', request)
     },
 

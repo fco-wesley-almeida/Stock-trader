@@ -15,9 +15,8 @@ export default {
           .catch(errorMessage)
       },
 
-      getFromFirebase: function (vm, url, objSource, f) {
-        // console.log('getFromFireBase')
-        vm.$http.get(url(objSource)).then(function (ans) {
+      getFromFirebase: (vm, url, objSource, f) => {
+        vm.$http.get(url(objSource)).then((ans) => {
           try {
             f(vm, ans)
           } catch (error) {
