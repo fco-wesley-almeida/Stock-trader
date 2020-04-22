@@ -104,6 +104,7 @@ export default {
 
     disabled () {
       const productsNumberIsPositive = this.quantity > 0
+      const quantityIsInteger = parseInt(this.quantity) === this.quantity
       let overflow
 
       if (this.nature === 's') {
@@ -112,7 +113,7 @@ export default {
       } else {
         overflow = (this.quantity > this.product.quantity)
       }
-      const disabled = !(productsNumberIsPositive && !overflow)
+      const disabled = !(quantityIsInteger && productsNumberIsPositive && !overflow)
       return disabled
     }
 

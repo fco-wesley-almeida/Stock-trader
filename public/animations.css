@@ -1,0 +1,53 @@
+/* Animação da transição entre as diferentes páginas */
+
+/* .component-disabled {
+    transform: translateY(-30px); 
+    opacity: 0;
+}
+
+.component-enabled {
+    transform: translateY(-30px); 
+    opacity: 0;
+} */
+
+:root{
+    --time-animation: 0.3s;
+    --translate-out: -30px;
+    --opacity-out: 0;
+    --transform-out: translateY(var(--translate-out));
+
+    --translate-in: 0px;
+    --opacity-in: 1;
+    --transform-in: translateY(var(--translate-in));
+}
+
+@keyframes slide-in {
+    from {
+        transform: var(--transform-out); 
+        opacity: var(--opacity-out);
+    }
+    to {
+        transform: var(--transform-in);
+        opacity: var(--opacity-in);
+    }
+}
+@keyframes slide-out {
+    from {
+        transform: var(--transform-in);
+        opacity: var(--opacity-in);
+    }
+    to {
+        transform: var(--transform-out); 
+        opacity: var(--opacity-out);
+    }
+}
+
+.slide-enter-active {
+    animation: slide-in var(--time-animation) ease;
+    transition: opacity var(--time-animation);
+}
+
+.slide-leave-active {
+    animation: slide-out var(--time-animation) ease;
+    transition: opacity var(--time-animation);
+}

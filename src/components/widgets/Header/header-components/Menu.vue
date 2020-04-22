@@ -5,9 +5,6 @@
     </template>
 
     <v-list>
-      <!-- <v-list-item v-for="(item, index) in items" :key="index" @click="console.log(item)">
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
-      </v-list-item>-->
       <v-list-item>
         <v-btn depressed class="buttons-label" @click="save">Salvar dados</v-btn>
       </v-list-item>
@@ -55,9 +52,10 @@ export default {
       const url = this.url
       const getFromFirebase = this.getFromFirebase
       const requestData = this.requestData
-      for (var i in requestData) {
-        getFromFirebase(this, url, requestData[i].objSource, requestData[i].functionLoad)
-      }
+      requestData.forEach((reqDataObj) => getFromFirebase(this, url, reqDataObj.objSource, reqDataObj.functionLoad))
+      // for (var i in requestData) {
+      //   getFromFirebase(this, url, requestData[i].objSource, requestData[i].functionLoad)
+      // }
     }
   }
 }

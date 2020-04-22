@@ -2,7 +2,9 @@
   <v-app>
     <Header></Header>
     <v-content>
-      <router-view></router-view>
+      <transition name="slide" type="animation" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </v-content>
   </v-app>
 </template>
@@ -40,4 +42,36 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/* @keyframes slide-in{
+  from {transform: translateY(40px);}
+  to {transform: translateY(0px);}
+}
+
+@keyframes slide-out{
+  from {transform: translateY(0px);}
+  to {transform: translateY(40px);}
+} */
+
+/* .slide-enter{
+  opacity: 0;
+}
+.slide-enter-active{
+  animation: slide-in 0.5s ease;
+  transition: opacity 0.5s;
+}
+.slide-enter-to{
+  opacity: 1;
+}
+
+.slide-leave{
+  opacity: 1;
+}
+.slide-leave-active{
+  animation: slide-out 0.5s ease;
+  transition: opacity 0.5s;
+}
+.slide-leave-to{
+  opacity: 0;
+} */
 </style>
